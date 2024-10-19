@@ -16,6 +16,9 @@ struct Grassy_WoodlandApp: App {
         WindowGroup {
             ContentView()
                 .environment(appModel)
+//                .onAppear {
+//                    appModel.immersiveSpaceState = .open
+//                }
         }
 
         ImmersiveSpace(id: appModel.immersiveSpaceID) {

@@ -49,7 +49,7 @@ struct ToggleImmersiveSpaceButton: View {
                 }
             }
         } label: {
-            Text(appModel.immersiveSpaceState == .open ? "Hide Immersive Space" : "Enter Immersive Space")
+            Text(appModel.immersiveSpaceState == .open ? "Hide Grassy Woodland" : "Load Grassy Woodland")
         }
         .disabled(appModel.immersiveSpaceState == .inTransition)
         .animation(.none, value: 0)
