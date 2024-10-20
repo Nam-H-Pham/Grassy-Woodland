@@ -7,7 +7,8 @@ import RealityKitContent
 class WoodlandsEnvironment: EnvironmentManager {
     override func assembleActors() {
         let anchor = AnchorEntity(world: [0, 0, 0])
-                                    
+        anchor.addChild(AnchorEntity(plane: .horizontal))
+            
         anchors["Scene"] = anchor
         
         let grassActor = CombinedGrassActor()
@@ -34,21 +35,7 @@ class WoodlandsEnvironment: EnvironmentManager {
         let spatialSoundEntities = environmentSoundManager.spawnAll()
         spatialSoundEntities.forEach { anchor.addChild($0) }
         
-//        let shadow = shadow()
-//        anchor.addChild(shadow)
-    }
-    
-    private func shadow() -> Entity {
-        let lightShineTarget = SIMD3<Float>(0, 0, 0)
-        let lightPosition: SIMD3<Float> = SIMD3<Float>(0.727_9, 2, 0.0 ) // corresponds to 70 degree angle
-        let distance: Float = 18.0
-        let shadowCastingLight = DirectionalLight()
-        shadowCastingLight.name = "shadowCastingLight"
-            shadowCastingLight.light = DirectionalLightComponent(color: .white, intensity: 2_145.707_8)
-        shadowCastingLight.shadow = DirectionalLightComponent.Shadow(maximumDistance: distance)
-        shadowCastingLight.position = lightPosition
-        shadowCastingLight.look(at: lightShineTarget, from: shadowCastingLight.position, relativeTo: nil)
-        return shadowCastingLight
+        anchor.components.set(GroundingShadowComponent(castsShadow: true))
     }
 }
 
